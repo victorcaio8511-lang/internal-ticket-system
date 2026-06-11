@@ -1,6 +1,8 @@
 from flask import Flask
+from routes.ticket_routes import ticket_bp
 
 app = Flask(__name__)
+app.register_blueprint(ticket_bp)
 
 @app.route("/")
 def home():

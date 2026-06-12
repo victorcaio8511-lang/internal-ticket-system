@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Chamado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Detalhes do Chamado</h1>
+
+    <div class="card">
+      <p><strong>ID:</strong> {{ ticket.id }}</p>
+      <p><strong>Título:</strong> {{ ticket.title }}</p>
+      <p><strong>Solicitante:</strong> {{ ticket.requester }}</p>
+      <p><strong>Setor:</strong> {{ ticket.department }}</p>
+      <p><strong>Descrição:</strong> {{ ticket.description }}</p>
+      <p><strong>Prioridade:</strong> {{ ticket.priority }}</p>
+      <p><strong>Status:</strong> {{ ticket.status }}</p>
+      <p><strong>Responsável:</strong> {{ ticket.responsible }}</p>
+      <p><strong>Data de Criação:</strong> {{ ticket.created_at }}</p>
+    </div>
+
+    <p><a href="/tickets/{{ ticket.id }}/edit">Editar Chamado</a></p>
+    <p><a href="/tickets">Voltar para Lista</a></p>
+  </div>
+</body>
+</html>
+

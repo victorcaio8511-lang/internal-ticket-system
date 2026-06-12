@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lista de Chamados</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1>Lista de Chamados</h1>
+
+        <p><a href="/tickets/create">Novo Chamado</a></p>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Buscar por título..."
+                onkeyup="searchTickets()"
+            >
+        </div>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                    <th>Responsável</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.id }}</td>
+                    <td><a href="/tickets/{{ ticket.id }}">{{ ticket.title }}</a></td>
+                    <td>{{ ticket.priority }}</td>
+                    <td>{{ ticket.status }}</td>
+                    <td>{{ ticket.responsible }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Nenhum chamado encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <script>
+            function searchTickets() {
+                let input = document.getElementById("searchInput");
+                let filter = input.value.toLowerCase();
+
+                let table = document.querySelector("table");
+                let rows = table.getElementsByTagName("tr");
+
+                for (let i = 1; i < rows.length; i++) {
+                    let titleCell = rows[i].getElementsByTagName("td")[1];
+
+                    if (titleCell) {
+                        let text = titleCell.textContent || titleCell.innerText;
+
+                        if (text.toLowerCase().indexOf(filter) > -1) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Novo Chamado</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Criar Novo Chamado</h1>
+    <div class="card">
+      <form action="/tickets/create" method="POST">
+        <div class="form-group">
+          <label for="requester_name">Nome do Solicitante</label>
+          <input type="text" id="requester_name" name="requester_name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="department">Setor</label>
+          <select id="department" name="department" required>
+            <option value="">Selecione</option>
+            <option value="Administrativo">Administrativo</option>
+            <option value="Financeiro">Financeiro</option>
+            <option value="RH">RH</option>
+            <option value="TI">TI</option>
+            <option value="Operações">Operações</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descrição</label>
+          <textarea id="description" name="description" rows="6" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Prioridade</label>
+          <select id="priority" name="priority">
+            <option value="Baixa">Baixa</option>
+            <option value="Média">Média</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="responsible">Responsável</label>
+          <select id="responsible" name="responsible">
+            <option value="AUTO">Atribuição Automática</option>
+            <option value="João">João</option>
+            <option value="Maria">Maria</option>
+            <option value="Carlos">Carlos</option>
+          </select>
+        </div>
+
+        <button type="submit">Criar Chamado</button>
+      </form>
+    </div>
+    <p><a href="/tickets">Voltar para Lista</a></p>
+  </div>
+</body>
+</html>

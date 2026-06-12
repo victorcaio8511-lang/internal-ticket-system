@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Chamado</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Editar Chamado</h1>
+
+    <div class="card">
+      <form action="{{ url_for('ticket.editar_ticket', id=ticket.id) }}" method="POST">
+        <div class="form-group">
+          <label for="requester_name">Nome do Solicitante</label>
+          <input id="requester_name" type="text" name="requester_name" value="{{ ticket.requester }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="department">Setor</label>
+          <select id="department" name="department" required>
+            <option value="">Selecione</option>
+            <option value="Administrativo" {% if ticket.department == 'Administrativo' %}selected{% endif %}>Administrativo</option>
+            <option value="Financeiro" {% if ticket.department == 'Financeiro' %}selected{% endif %}>Financeiro</option>
+            <option value="RH" {% if ticket.department == 'RH' %}selected{% endif %}>RH</option>
+            <option value="TI" {% if ticket.department == 'TI' %}selected{% endif %}>TI</option>
+            <option value="Operações" {% if ticket.department == 'Operações' %}selected{% endif %}>Operações</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input id="title" type="text" name="title" value="{{ ticket.title }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descrição</label>
+          <textarea id="description" name="description" rows="6" required>{{ ticket.description }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Prioridade</label>
+          <select id="priority" name="priority">
+            <option value="Baixa" {% if ticket.priority == 'Baixa' %}selected{% endif %}>Baixa</option>
+            <option value="Média" {% if ticket.priority == 'Média' %}selected{% endif %}>Média</option>
+            <option value="Alta" {% if ticket.priority == 'Alta' %}selected{% endif %}>Alta</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Responsável</label>
+          <select name="responsible">
+            <option value="João" {% if ticket.responsible == "João" %}selected{% endif %}>João</option>
+            <option value="Maria" {% if ticket.responsible == "Maria" %}selected{% endif %}>Maria</option>
+            <option value="Carlos" {% if ticket.responsible == "Carlos" %}selected{% endif %}>Carlos</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="Aberto" {% if ticket.status == 'Aberto' %}selected{% endif %}>Aberto</option>
+            <option value="Em Andamento" {% if ticket.status == 'Em Andamento' %}selected{% endif %}>Em Andamento</option>
+            <option value="Resolvido" {% if ticket.status == 'Resolvido' %}selected{% endif %}>Resolvido</option>
+            <option value="Fechado" {% if ticket.status == 'Fechado' %}selected{% endif %}>Fechado</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Salvar Alterações</button>
+          <a class="btn-link" href="{{ url_for('ticket.detalhar_ticket', id=ticket.id) }}">Voltar para Detalhes</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
